@@ -2,14 +2,37 @@
 
 Suppose you are an expert mathematician and an expert in Lean4 and Mathlib.
 
-Your task is to generate a formal proof in Lean4 according to the corresponding informal proof in natural language provided below. The formal proof must express the precise logic of the informal proof and you must use Lean4. You will be provided with auxiliary information to improve the translation.
+Your task is to generate a formal proof in Lean4 to prove the given formal theorem in Lean4 step by step. You must use Lean4. You will be provided with auxiliary information to improve the generation. Make sure you follow the principles of formal proving when you generate formal proofs.
 
 ## Auxiliary Helpful Information
 
-There are two parts of information attached to the proof to assist in improving the generation.
+There are three parts of information to assist in improving the generation.
 
 * The formal theorem, which is the goal of the entire proof. It is written in Lean.
 * The informal theorem. It is the explanation of the formal theorem in natural language.
+* The informal proof. It is the proof of the formal theorem in natural language.
+
+## Principles of Formal Proofs
+
+1. You should write a step of informal proof written in natural language, then write a step of formal proof wriiten in Lean4 corresponding to the informal guidance above.
+  Example:
+  Do NOT write
+  ```lean
+  example {G : Type*} [Group G] (a b : G) (h : a * b = b * a⁻¹) : b * a = a⁻¹ * b := by
+    have h1 : a * b * a = b * a⁻¹ * a := by exact mul_right_cancel_iff.mpr h
+    rw [inv_mul_cancel_right] at h1
+    rw [← h1, ← mul_assoc, ← mul_assoc, inv_mul_self, one_mul, h, mul_assoc b, inv_mul_self, mul_one]  
+  ```
+  Write
+  ```lean
+  example {G : Type*} [Group G] (a b : G) (h : a * b = b * a⁻¹) : b * a = a⁻¹ * b := by
+    -- introduce a new hypothesis h1 by multiply a on both sides
+    have h1 : a * b * a = b * a⁻¹ * a := by exact mul_right_cancel_iff.mpr h
+    -- then simplify h1
+    rw [inv_mul_cancel_right] at h1
+    -- substitute into the question, and prove it by rewriting:
+    rw [← h1, ← mul_assoc, ← mul_assoc, inv_mul_self, one_mul, h, mul_assoc b, inv_mul_self, mul_one]
+  ``` instead.
 
 **Warning: The following examples are only used to demonstrate the format; their exact meaning is irrelevant.**
 
@@ -17,14 +40,14 @@ There are two parts of information attached to the proof to assist in improving 
 
 **Informal theorem:**
 Show that every group $G$ with identity $e$ and such that $x * x=e$ for all $x \in G$ is Abelian.
-**Formal theorem:**
-import Mathlib
-
-example {G : Type*} [Group G] (h: ∀ (x : G), x * x = 1) : CommGroup G := by sorry
 **Informal proof:**
 Proof
 1.To prove a group G is a commutative group, we just need to prove that for all a b in G, a * b = b * a.
 2. And this is exact a calculation a * b = a * b * (b * a) * (b * a) = (a * (b * b) * a) * (b * a) = b * a.
+**Formal theorem:**
+import Mathlib
+
+example {G : Type*} [Group G] (h: ∀ (x : G), x * x = 1) : CommGroup G := by
 
 ## Output1:
 
@@ -47,12 +70,12 @@ example {G : Type*} [Group G] (h: ∀ (x : G), x * x = 1) : CommGroup G := by
 
 **Informal theorem:**
 Suppose that $G$ is a group and $a, b \in G$ satisfy $a * b=b * a^{-1}$. Prove that $b * a=a^{-1} * b$.
+**Informal proof:**
+Introduce a new hypothesis $h1$ by multiplying $a$ on both sides, then simplify $h1$  , substitute into the question we are proving, and it can be proved by rewriting.
 **Formal theorem:**
 import Mathlib
 
 example {G : Type*} [Group G] (a b : G) (h : a * b = b * a⁻¹) : b * a = a⁻¹ * b := sorry
-**Informal proof:**
-  introduce a new hypothesis $h1$ by multiplying $a$ on both sides, then simplify $h1$  , substitute into the question we are proving, and it can be proved by rewriting.
 
 ## Output2:
 
