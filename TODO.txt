@@ -1,0 +1,9 @@
+实验
+略加修改prompt,还试这五道题 (把那道错误的题自然语言改了)
+1. 让Claude直接生成不带注释的whole proof
+1. 让Claude直接生成带注释的whole proof
+1. 让Claude先生成自然语言证明,再生成带注释的whole proof
+
+决定路线
+1. informalize proof state
+2. 
