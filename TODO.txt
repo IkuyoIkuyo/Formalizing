@@ -1,10 +1,19 @@
 实验
 略加修改prompt,还试这五道题 (把那道错误的题自然语言改了)
-1. 让Claude直接生成不带注释的whole proof
 1. 让Claude直接生成带注释的whole proof
-1. 让Claude先生成自然语言证明,再生成带注释的whole proof (也许应该提供好自然语言证明)
-1. 让Claude生成自然语言证明+一堆have,不填这些have后的sorry (也许应该提供好自然语言证明)
+2. 让Claude先生成自然语言证明,再生成带注释的whole proof (也许应该提供好自然语言证明)
+3. 让Claude生成自然语言证明+一堆have,不填这些have后的sorry (也许应该提供好自然语言证明)
+4. 让Claude直接生成whole informal proof
 
 决定路线
 1. informalize proof state
 2. 
+
+jjd:
+1. 让Claude生成自然语言证明+一堆have,不填这些have后的sorry (也许应该提供好自然语言证明)的prompt
+2. 两个example的铁人四项。
+
+gq:
+实验1的那道错误的题
+实验2的prompt
+实验4的prompt
