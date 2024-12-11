@@ -1,4 +1,3 @@
-**Informal proof:**
 Let's prove this by induction on n.
 
 1) Base case (n = 1):
@@ -16,5 +15,3 @@ Let's prove this by induction on n.
    - By laws of exponents, this equals $a^{p^{k+1}} + b^{p^{k+1}}$
 
 4) Therefore, by mathematical induction, $(a+b)^{p^n} = a^{p^n} + b^{p^n}$ holds for all positive integers n.
-
-This proves that for any field F of characteristic p ≠ 0, $(a+b)^m = a^m + b^m$ where m = p^n, for all a, b in F and any positive integer n.

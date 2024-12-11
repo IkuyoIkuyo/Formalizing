@@ -1,6 +1,3 @@
-**Informal proof:**
-Let me prove this step by step.
-
 1) Since a and b are nilpotent, there exist positive integers m and n such that a^m = 0 and b^n = 0.
 
 2) Consider (a + b)^k where k = m + n - 1.
