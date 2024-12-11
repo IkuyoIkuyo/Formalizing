@@ -1,0 +1,18 @@
+253 的自然语言证明里 先写了一段错的,二择失败的证明,又写了一段对的
+```
+2) Let's multiply the equation xy = 1 on the left by z:
+   * z(xy) = z1
+   * (zx)y = y (using associativity of multiplication)
+   * 1y = y (using h2: zx = 1)
+   * y = y
+```
+
+326 的自然自然语言证明是错的,构造不正确. 但是能看出一些智慧来,他试图构造一个多项式以所有F里的元素为根,尽管失败了.
+
+
+1559 不能说是错,话说的不好,第4步应该直接说出φ(P)是Sylow子群来,但是Claude等到第六步需要用这个性质的时候才说,属于规划能力问题.
+```
+4) Now, φ(P) is also a p-subgroup of G (since its order is a power of p).
+```
+
+剩下两个都对
