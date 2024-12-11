@@ -1,0 +1,24 @@
+IFS:
+Suppose that $G$ is a group and $a, b \\in G$ satisfy $a * b=b * a^{-1}$ where as usual, $a^{-1}$ is the inverse for $a$. Prove that $b * a=a^{-1} * b$.
+
+FS:
+import Mathlib
+
+theorem exercise_mul_eq_inv_mul {G : Type*} [Group G] (a b : G) (h : a * b = b * a⁻¹) : b * a = a⁻¹ * b := by
+
+IFP:
+(1) Multiply by \(a\) on the right hand side of \(a * b = b * a^{-1}\) to get \(a * b * a = b * a^{-1} * a = b\).
+
+(2) Multiply by \(a^{-1}\) on the left hand side of the previous equation \(a * b * a = b\) to get \(a^{-1} * (a * b * a) = a^{-1} * b\). Simplify it we get the final result \(b * a = a^{-1} * b\).
+
+FP:
+  -- Multiply by \(a\) on the right hand side of \(a * b = b * a^{-1}\) to get \(a * b * a = b * a^{-1} * a = b\).
+  have h1 : a * b * a = b := by
+    calc
+      a * b * a = b * a⁻¹ * a := by rw [h]
+      _ = b := by simp
+  -- Multiply by \(a^{-1}\) on the left hand side of the previous equation \(a * b * a = b\) to get \(a^{-1} * (a * b * a) = a^{-1} * b\).
+  have h2 : a⁻¹ * (a * b * a) = a⁻¹ * b := by rw [h1]
+  -- Simplify it we get the final result \(b * a = a^{-1} * b\).
+  rw [← mul_assoc, ← mul_assoc, inv_mul_cancel, one_mul] at h2
+  exact h2

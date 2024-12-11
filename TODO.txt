@@ -11,7 +11,7 @@
 
 jjd:
 1. 让Claude生成自然语言证明+一堆have,不填这些have后的sorry (也许应该提供好自然语言证明)的prompt
-2. 两个example的铁人四项。
+2. 两个example的铁人四项。(prompt 里需要一个example, 4部分信息:Informal Formal S + P)
 
 gq:
 实验1的那道错误的题

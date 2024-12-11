@@ -1,0 +1,89 @@
+251 Fixed version
+```
+open Nat -- add open
+```
+
+```
+  have expansion : (a + b) ^ (m + n - 1) = ∑ i in range (m + n), choose (m + n - 1) i * a ^ i * b ^ (m + n - 1 - i) := by
+    -- apply add_pow -- here a modification
+    rw [add_pow, show m + n - 1 + 1 = m + n by sorry] -- we also need m n ≥ 1
+    congr
+    ext
+    ring
+```
+
+```
+    rw [pow_eq_zero_of_le h hm] -- was pow_eq_zero_of_ge
+    simp
+```
+
+```
+  · -- Case i < m
+    have : m + n - 1 - i ≥ n := by
+      push_neg at h
+      linarith -- formalization problem, linarith do not work for Nat
+```
+
+253
+还是在证明z = y 而不是 y = z
+把题目换成z = y就没问题
+
+326
+
+h2 应该是degree p \ne 0
+```
+  -- Since F is algebraically closed, p must have a root
+  have h1 := IsAlgClosed.exists_root p
+  -- have h2 : p ≠ 0 := by
+  --   simp
+  --   exact one_ne_zero
+  
+  obtain ⟨b, hb⟩ := h1 sorry
+```
+```
+    have : ∏ a in univ, (b - a) = 0 := by
+      refine prod_eq_zero_iff.mpr ?_ -- change simp to apply? gives the result
+      use b
+      constructor
+      · exact Finset.mem_univ b
+      · ring
+```
+```
+  -- This contradicts that b is a root
+  have contra := hb -- after give type "p.eval b = 0" then ok
+  rw [eval_p] at contra 
+  exact one_ne_zero contra
+```
+
+思路正确,形式化小错很多
+
+1559
+中间写定义问题很多
+1. 定义的field名字不对, 每个field要填什么也不对
+2. 处理类型转换还是有问题
+```
+  -- Since P is normal, it's the unique p-Sylow subgroup
+  -- Therefore φP = P
+  -- exact P.uniqueOfNormal pn φP (定理名不对,即使改对了也不行)
+  have := (P.unique_of_normal pn)
+  have := Subsingleton.allEq φP P
+  exact congrArg (fun x : Sylow p G => x.toSubgroup.carrier) this
+```
+
+1657
+二择失败*1 -- Nat.pow_succ and Nat.pow_succ'
+还是太粗糙了
+```
+    -- Use Frobenius homomorphism (Freshman's Dream)
+    exact frobenius_add R p pchar _ _
+```
+需要看到infoview或者rw很多次
+
+总结: 
+1. 思路正确,形式化小错很多, 需要反复修改(这是否可以做到?提供lean报错信息+错误位置+leansearch) 定理名瞎写, 变量类型问题, 以及有些纯形式化问题确实很难
+2. 把2step的结果给人做让人类改错,能加速5倍以上?
+3. 如果遇到在题目中间需要写定义,缺的信息更多
+4. 很多步骤还是太粗糙
+
+是否可以把每个错当成一个让stepprover补全的内容?
+
